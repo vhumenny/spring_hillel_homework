@@ -1,6 +1,5 @@
 package com.hillel.spring.dao;
 
-import com.hillel.spring.model.Cart;
 import com.hillel.spring.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -24,7 +23,7 @@ public class CartDao {
         Product product = new Product();
         product.setId(resultSet.getInt("id"));
         product.setName(resultSet.getString("name"));
-        product.setPrice(resultSet.getBigDecimal("price"));
+        product.setCost(resultSet.getBigDecimal("price"));
         return product;
     };
 

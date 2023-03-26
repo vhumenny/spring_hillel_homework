@@ -1,16 +1,17 @@
 package com.hillel.spring.model;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
+
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "carts")
-public class Cart {
+public class Order {
     private Integer id;
+    private LocalDate date;
+    private BigDecimal cost;
     private List<Product> products;
 }
