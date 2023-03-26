@@ -13,9 +13,7 @@ public class ProductDao {
     private final JdbcTemplate jdbcTemplate;
     public static final String INSERT_QUERY = "INSERT INTO products(name, price) VALUES (?, ?)";
     public static final String DELETE_QUERY = "DELETE FROM products WHERE id = ?";
-
     public static final String GET_PRODUCT_BY_ID_QUERY = "SELECT * FROM products WHERE id= ?";
-
     public static final String GET_ALL_PRODUCTS_QUERY = "SELECT * FROM products";
 
     private final RowMapper<Product> productRowMapper = (resultSet, rowNum) -> {

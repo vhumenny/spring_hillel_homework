@@ -18,10 +18,8 @@ public class AppConfig {
     private String driver;
     @Value("${db.url}")
     private String url;
-
     @Value("${db.username}")
     private String username;
-
     @Value("${db.password}")
     private String password;
 
@@ -34,6 +32,7 @@ public class AppConfig {
         dataSource.setPassword(password);
         return dataSource;
     }
+
     @Bean
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());

@@ -3,7 +3,6 @@ package com.hillel.spring;
 import com.hillel.spring.config.AppConfig;
 import com.hillel.spring.dao.CartDao;
 import com.hillel.spring.dao.ProductDao;
-import com.hillel.spring.model.Cart;
 import com.hillel.spring.model.Product;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -11,9 +10,7 @@ import java.math.BigDecimal;
 
 public class Main {
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext(AppConfig.class);
-
+        var context = new AnnotationConfigApplicationContext(AppConfig.class);
 
         ProductDao productDao = context.getBean(ProductDao.class);
         CartDao cartDao = context.getBean(CartDao.class);
@@ -36,7 +33,5 @@ public class Main {
 //        cartDao.addProductInCart(1,3);
         System.out.println(cartDao.findById(3));
 //        productDao.save(paper);
-
-
     }
 }
