@@ -15,8 +15,10 @@ public class CartDao {
     public static final String DELETE_QUERY = "DELETE FROM carts WHERE id = ?";
     public static final String ADD_CART_QUERY = "INSERT INTO carts (id) VALUES (?)";
     public static final String ADD_PRODUCT_IN_CART_QUERY = "INSERT INTO product_cart (product_id,cart_id) VALUES (?,?)";
-    public static final String FIND_BY_ID_QUERY = "SELECT * FROM carts, product_cart " +
-                                                  "WHERE carts.id = product_cart.cart_id AND carts.id = ? ";
+    public static final String FIND_BY_ID_QUERY = "select * from " +
+                                                  "(SELECT * FROM products,product_cart\n" +
+                                                  "      WHERE products.id = product_cart.product_id\n" +
+                                                  "        AND product_cart.cart_id = ?) as `ppc*` ";
 
     private final RowMapper<Product> productRowMapper = (resultSet, rowNum) -> {
         Product product = new Product();
@@ -40,14 +42,14 @@ public class CartDao {
         return cart.getId();
     }
 
-    public Product addProductInCart(Product product, Integer cartId) {
-        jdbcTemplate.update(ADD_PRODUCT_IN_CART_QUERY, product.getId(), cartId);
-        return product;
+    public void addProductInCart(Integer productId, Integer cartId) {
+        jdbcTemplate.update(ADD_PRODUCT_IN_CART_QUERY, productId, cartId);
     }
 
     public Cart findById(Integer id) {
         Cart cart = new Cart();
         List<Product> products = jdbcTemplate.query(FIND_BY_ID_QUERY, productRowMapper, id);
+        cart.setId(id);
         cart.setProducts(products);
         return cart;
     }
