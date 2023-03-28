@@ -47,7 +47,7 @@ public class OrderRepository {
 
         Order order1 = new Order(1, LocalDate.now(), BigDecimal.valueOf(30), productList1);
         Order order2 = new Order(2, LocalDate.now(), BigDecimal.valueOf(40), productList2);
-        orders.put(order1.getId(), order1);
-        orders.put(order2.getId(), order2);
+        addOrder(order1);
+        addOrder(order2);
     }
 }
