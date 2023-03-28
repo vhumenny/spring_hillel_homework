@@ -2,6 +2,7 @@ package com.hillel.spring.controller;
 
 import com.hillel.spring.repository.OrderRepository;
 import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,23 +21,22 @@ public class OrderController {
         this.orderRepository = orderRepository;
     }
 
-    @RequestMapping()
-    public String getInfo(Model model) {
-        model.addAttribute("id", new Object());
-        return "orders";
+    @RequestMapping("/")
+    public String getInfo() {
+        return "index";
     }
 
-    @RequestMapping("/{id}")
-    public String showOrderById( @PathVariable("id")  Integer id, Model model) {
+    @RequestMapping("/orderId")
+    public String showOrderById(HttpServletRequest request, Model model) {
+        Integer id = Integer.valueOf(request.getParameter("id"));
         model.addAttribute("order", orderRepository.getOrderById(id));
-        return "order-by-id";
+        return "orderId";
     }
 
     @RequestMapping("/allOrders")
     public String showAllOrders(Model model) {
-        model.addAttribute("orders", orderRepository.getOrders().values());
-        System.out.println(orderRepository.getOrders().values());
-        return "all-orders";
+        model.addAttribute("all_order", orderRepository.getOrders().values());
+        return "allOrders";
     }
 
 
